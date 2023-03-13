@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { InvoiceBuilderRoutingModule } from './invoice-builder-routing.module';
 import { InvoiceBuilderComponent } from './invoice-builder.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
 @NgModule({
   declarations: [
     InvoiceBuilderComponent,
-    MainContentComponent
+    MainContentComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
