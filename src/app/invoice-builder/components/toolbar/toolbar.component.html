@@ -1,7 +1,7 @@
 <mat-toolbar color="accent">
-  <button mat-icon-button
-          class="example-icon"
-          aria-label="Example icon-button with menu icon">
+  <button *ngIf="showMenuIcon"
+          mat-icon-button
+          (click)="toggleSidenav.emit()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Invoice Builder</span>
