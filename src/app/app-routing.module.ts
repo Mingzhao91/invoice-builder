@@ -3,15 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'invoice-builder',
+    path: 'dashboard',
     loadChildren: () =>
-      import('./invoice-builder/invoice-builder.module').then(
-        (m) => m.InvoiceBuilderModule
-      ),
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: '**',
-    redirectTo: 'invoice-builder',
+    redirectTo: 'dashboard',
   },
 ];
 
