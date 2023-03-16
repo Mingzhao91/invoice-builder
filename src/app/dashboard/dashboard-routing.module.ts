@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { DashboardComponent } from './dashboard.component';
+import { InvoiceListingComponent } from '../invoices/components/invoice-listing/invoice-listing.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: MainContentComponent,
+      },
+      {
+        path: 'invoices',
+        component: InvoiceListingComponent,
       },
     ],
   },

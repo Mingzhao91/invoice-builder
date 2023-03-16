@@ -13,6 +13,16 @@ const MAX_WIDTH_BREAKPOINT = 768;
 })
 export class SideNavComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+  links = [
+    {
+      name: 'Invoices',
+      url: 'invoices',
+    },
+    {
+      name: 'Clients',
+      url: 'clients',
+    },
+  ];
 
   constructor(private observer: BreakpointObserver) {}
 
