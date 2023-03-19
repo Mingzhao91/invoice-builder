@@ -21,12 +21,25 @@ export default {
 
     const { error, value } = schema.validate(req.body);
     if (error) {
-      console.log(error);
       return res.status(StatusCodes.BAD_REQUEST).json(error);
     }
 
     Invoice.create(value)
       .then((invoice) => res.json(invoice))
+      .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
+  },
+  findOne(req, res, nex) {
+    const { id } = req.params;
+    Invoice.findById(id)
+      .then((invoice) => {
+        if (!invoice) {
+          return res
+            .status(StatusCodes.NOT_FOUND)
+            .json({ err: "Could not find any invoice" });
+        }
+
+        return res.json(invoice);
+      })
       .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
   },
 };
