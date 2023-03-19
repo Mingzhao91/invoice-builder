@@ -56,4 +56,31 @@ export default {
       })
       .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
   },
+  update(req, res, next) {
+    const schema = Joi.object({
+      item: Joi.string().optional(),
+      date: Joi.date().optional(),
+      due: Joi.date().optional(),
+      qty: Joi.number().integer().optional(),
+      tax: Joi.number().optional(),
+      rate: Joi.number().optional(),
+    });
+
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+      return res.status(StatusCodes.BAD_REQUEST).json(error);
+    }
+
+    const { id } = req.params;
+    Invoice.findByIdAndUpdate(id, value)
+      .then((invoice) => {
+        if (!invoice) {
+          return res
+            .status(StatusCodes.NOT_FOUND)
+            .json({ err: "Could not update any invoice" });
+        }
+        return res.json(invoice);
+      })
+      .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
+  },
 };
