@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import logger from "morgan";
+import { StatusCodes } from "http-status-codes";
 
 import { router } from "./config/routes";
 
@@ -17,11 +18,11 @@ app.use("/api", router);
 app.use((req, res, next) => {
   const error = new Error("Not Found!");
   error.message = "Invalid Route";
-  error.status = 404;
+  error.status = StatusCodes.NOT_FOUND;
   next(error);
 });
 app.use((error, req, res, next) => {
-  res.status(error.status || 500);
+  res.status(error.status || StatusCodes.INTERNAL_SERVER_ERROR);
   return res.json({
     error: {
       message: error.message,
