@@ -1,3 +1,5 @@
+import Joi from "joi";
+
 import Invoice from "../models/invoice.model";
 
 export default {
@@ -5,21 +7,22 @@ export default {
     res.json(invoices);
   },
   create(req, res, next) {
-    const { item, qty, date, due, tax, rate } = req.body;
-    if (!item) {
-      return res.status(400).json({ err: "item is required field" });
-    }
-    if (!date) {
-      return res.status(400).json({ err: "date is required field" });
-    }
-    if (!due) {
-      return res.status(400).json({ err: "due is required field" });
-    }
-    if (!qty) {
-      return res.status(400).json({ err: "qty is required field" });
+    const schema = Joi.object({
+      item: Joi.string().required(),
+      date: Joi.date().required(),
+      due: Joi.date().required(),
+      qty: Joi.number().integer().required(),
+      tax: Joi.number().optional(),
+      rate: Joi.number().optional(),
+    });
+
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+      console.log(error);
+      return res.status(400).json(error);
     }
 
-    Invoice.create({ item, qty, date, due, tax, rate })
+    Invoice.create(value)
       .then((invoice) => res.json(invoice))
       .catch((err) => res.status(500).json(err));
   },
