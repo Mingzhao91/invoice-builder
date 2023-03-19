@@ -1,26 +1,26 @@
-const invoices = [
-  {
-    _id: "189547",
-    item: "Amazon Product",
-    qty: 10,
-    date: new Date(2023, 5, 19, 20, 10, 5),
-  },
-  {
-    _id: "884563",
-    item: "Google Product",
-    qty: 10,
-    date: new Date(2023, 4, 9, 23, 1, 40),
-  },
-  {
-    _id: "445216",
-    item: "Linked Product",
-    qty: 10,
-    date: new Date(2023, 5, 11, 7, 30, 51),
-  },
-];
+import Invoice from "../models/invoice.model";
 
 export default {
   findAll(req, res, next) {
     res.json(invoices);
+  },
+  create(req, res, next) {
+    const { item, qty, date, due, tax, rate } = req.body;
+    if (!item) {
+      return res.status(400).json({ err: "item is required field" });
+    }
+    if (!date) {
+      return res.status(400).json({ err: "date is required field" });
+    }
+    if (!due) {
+      return res.status(400).json({ err: "due is required field" });
+    }
+    if (!qty) {
+      return res.status(400).json({ err: "qty is required field" });
+    }
+
+    Invoice.create({ item, qty, date, due, tax, rate })
+      .then((invoice) => res.json(invoice))
+      .catch((err) => res.status(500).json(err));
   },
 };
