@@ -42,4 +42,18 @@ export default {
       })
       .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
   },
+  delete(req, res, next) {
+    const { id } = req.params;
+    Invoice.findByIdAndRemove(id)
+      .then((invoice) => {
+        if (!invoice) {
+          return res
+            .status(StatusCodes.NOT_FOUND)
+            .json({ err: "Could not delete any invoice" });
+        }
+
+        return res.json(invoice);
+      })
+      .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
+  },
 };

@@ -8,3 +8,4 @@ export const router = express.Router();
 router.get("/invoices", invoiceController.findAll);
 router.get("/invoices/:id", invoiceController.findOne);
 router.post("/invoices", invoiceController.create);
+router.delete("/invoices/:id", invoiceController.delete);
