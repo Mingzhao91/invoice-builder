@@ -1,1 +1,47 @@
-<p>invoice-form works!</p>
+<mat-card>
+  <div class="form-container">
+    <mat-form-field appearance="fill">
+      <input matInput
+             placeholder="Item">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput
+             [matDatepicker]="date"
+             placeholder="Choose a date">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix
+                             [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput
+             [matDatepicker]="due"
+             placeholder="Choose a due date">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix
+                             [for]="due"></mat-datepicker-toggle>
+      <mat-datepicker #due></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput
+             placeholder="Qty"
+             type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput
+             placeholder="Tax"
+             type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput
+             placeholder="Rate"
+             type="number">
+    </mat-form-field>
+  </div>
+
+</mat-card>
