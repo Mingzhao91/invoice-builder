@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { InvoiceListingComponent } from '../invoices/components/invoice-listing/invoice-listing.component';
 import { ClientListingComponent } from '../clients/components/client-listing/client-listing.component';
+import { InvoiceFormComponent } from '../invoices/components/invoice-form/invoice-form.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'invoices',
         component: InvoiceListingComponent,
+      },
+      {
+        path: 'invoices/new',
+        component: InvoiceFormComponent,
       },
       {
         path: 'clients',
