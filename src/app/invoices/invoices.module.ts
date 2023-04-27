@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from '../shared/material.module';
@@ -10,7 +10,13 @@ import { InvoiceFormComponent } from './components/invoice-form/invoice-form.com
 
 @NgModule({
   declarations: [InvoiceListingComponent, InvoiceFormComponent],
-  imports: [CommonModule, MaterialModule, FormsModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   exports: [InvoiceListingComponent, InvoiceFormComponent],
 })
 export class InvoicesModule {}

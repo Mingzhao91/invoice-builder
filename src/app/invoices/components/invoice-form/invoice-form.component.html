@@ -1,14 +1,19 @@
 <mat-card>
-  <div class="form-container">
+  <form class="form-container"
+        [formGroup]="invoiceForm!"
+        novalidate
+        (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <input matInput
-             placeholder="Item">
+             placeholder="Item"
+             formControlName="item">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <input matInput
              [matDatepicker]="date"
-             placeholder="Choose a date">
+             placeholder="Choose a date"
+             formControlName="date">
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix
                              [for]="date"></mat-datepicker-toggle>
@@ -18,7 +23,8 @@
     <mat-form-field appearance="fill">
       <input matInput
              [matDatepicker]="due"
-             placeholder="Choose a due date">
+             placeholder="Choose a due date"
+             formControlName="due">
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix
                              [for]="due"></mat-datepicker-toggle>
@@ -28,20 +34,32 @@
     <mat-form-field appearance="fill">
       <input matInput
              placeholder="Qty"
-             type="number">
+             type="number"
+             formControlName="qty">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <input matInput
              placeholder="Tax"
-             type="number">
+             type="number"
+             formControlName="tax">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <input matInput
              placeholder="Rate"
-             type="number">
+             type="number"
+             formControlName="rate">
     </mat-form-field>
-  </div>
+
+    <div>
+      <button mat-raised-button
+              type="submit"
+              color="accent">Save</button>
+      <button mat-raised-button
+              type="reset"
+              color="accent">Cancel</button>
+    </div>
+  </form>
 
 </mat-card>

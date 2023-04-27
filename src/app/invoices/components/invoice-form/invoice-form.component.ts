@@ -4,8 +4,8 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export const MY_DATE_FORMAT = {
   parse: {
@@ -33,7 +33,26 @@ export const MY_DATE_FORMAT = {
   ],
 })
 export class InvoiceFormComponent implements OnInit {
-  constructor() {}
+  invoiceForm?: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm() {
+    this.invoiceForm = this.fb.group({
+      item: '',
+      date: '',
+      due: '',
+      qty: '',
+      rate: '',
+      tax: '',
+    });
+  }
+
+  onSubmit() {
+    console.log(this.invoiceForm?.value);
+  }
 }
