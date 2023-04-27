@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { InvoiceService } from '../../services/invoice.service';
 
 export const MY_DATE_FORMAT = {
@@ -37,12 +40,18 @@ export class InvoiceFormComponent implements OnInit {
   invoiceForm?: FormGroup;
 
   constructor(
+    private snackBar: MatSnackBar,
     private fb: FormBuilder,
+    private router: Router,
     private invoiceService: InvoiceService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
   createForm() {
@@ -62,10 +71,13 @@ export class InvoiceFormComponent implements OnInit {
     console.log(this.invoiceForm?.value);
     this.invoiceService.createInvoice(this.invoiceForm?.value).subscribe({
       next: (data) => {
+        this.openSnackBar('Invoice created!', 'Success');
         this.invoiceForm?.reset();
+        this.router.navigate(['dashboard', 'invoices']);
       },
       error: (err) => {
         console.log('err: ', err);
+        this.openSnackBar('Failed to create an invoice!', 'Error');
       },
     });
   }
