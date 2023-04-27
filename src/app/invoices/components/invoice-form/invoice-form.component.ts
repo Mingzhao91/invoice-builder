@@ -59,9 +59,9 @@ export class InvoiceFormComponent implements OnInit {
       item: ['', Validators.required],
       date: ['', Validators.required],
       due: ['', Validators.required],
-      qty: ['', Validators.required],
-      rate: [''],
-      tax: [''],
+      qty: [0, Validators.required],
+      rate: [0],
+      tax: [0],
     });
 
     this.invoiceForm.controls['item'].invalid;
