@@ -6,6 +6,7 @@ import {
 } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { InvoiceService } from '../../services/invoice.service';
 
 export const MY_DATE_FORMAT = {
   parse: {
@@ -35,7 +36,10 @@ export const MY_DATE_FORMAT = {
 export class InvoiceFormComponent implements OnInit {
   invoiceForm?: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private invoiceService: InvoiceService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -54,5 +58,13 @@ export class InvoiceFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.invoiceForm?.value);
+    this.invoiceService.createInvoice(this.invoiceForm?.value).subscribe({
+      next: (data) => {
+        this.invoiceForm?.reset();
+      },
+      error: (err) => {
+        console.log('err: ', err);
+      },
+    });
   }
 }
