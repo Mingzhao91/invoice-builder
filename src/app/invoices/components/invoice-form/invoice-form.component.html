@@ -1,15 +1,18 @@
 <mat-card>
+  <h2>Create Invoice</h2>
   <form class="form-container"
         [formGroup]="invoiceForm!"
         novalidate
         (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              placeholder="Item"
              formControlName="item">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              [matDatepicker]="date"
              placeholder="Choose a date"
@@ -20,7 +23,8 @@
       <mat-datepicker #date></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              [matDatepicker]="due"
              placeholder="Choose a due date"
@@ -31,21 +35,24 @@
       <mat-datepicker #due></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              placeholder="Qty"
              type="number"
              formControlName="qty">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              placeholder="Tax"
              type="number"
              formControlName="tax">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill"
+                    color="accent">
       <input matInput
              placeholder="Rate"
              type="number"
