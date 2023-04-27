@@ -5,7 +5,7 @@ import {
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InvoiceService } from '../../services/invoice.service';
 
 export const MY_DATE_FORMAT = {
@@ -47,13 +47,15 @@ export class InvoiceFormComponent implements OnInit {
 
   createForm() {
     this.invoiceForm = this.fb.group({
-      item: '',
-      date: '',
-      due: '',
-      qty: '',
-      rate: '',
-      tax: '',
+      item: ['', Validators.required],
+      date: ['', Validators.required],
+      due: ['', Validators.required],
+      qty: ['', Validators.required],
+      rate: [''],
+      tax: [''],
     });
+
+    this.invoiceForm.controls['item'].invalid;
   }
 
   onSubmit() {

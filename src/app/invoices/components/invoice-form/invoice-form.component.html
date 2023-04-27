@@ -9,6 +9,8 @@
       <input matInput
              placeholder="Item"
              formControlName="item">
+      <mat-error *ngIf="invoiceForm!.controls['item'].touched && invoiceForm!.controls['item'].invalid">item is
+        required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill"
@@ -21,6 +23,8 @@
       <mat-datepicker-toggle matSuffix
                              [for]="date"></mat-datepicker-toggle>
       <mat-datepicker #date></mat-datepicker>
+      <mat-error *ngIf="invoiceForm!.controls['date'].touched && invoiceForm!.controls['date'].invalid">date is
+        required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill"
@@ -33,6 +37,8 @@
       <mat-datepicker-toggle matSuffix
                              [for]="due"></mat-datepicker-toggle>
       <mat-datepicker #due></mat-datepicker>
+      <mat-error *ngIf="invoiceForm!.controls['due'].touched && invoiceForm!.controls['due'].invalid">due is
+        required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill"
@@ -41,6 +47,8 @@
              placeholder="Qty"
              type="number"
              formControlName="qty">
+      <mat-error *ngIf="invoiceForm!.controls['qty'].touched && invoiceForm!.controls['qty'].invalid">qty is
+        required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill"
@@ -62,7 +70,8 @@
     <div>
       <button mat-raised-button
               type="submit"
-              color="accent">Save</button>
+              color="accent"
+              [disabled]="!invoiceForm?.valid">Save</button>
       <button mat-raised-button
               type="reset"
               color="accent">Cancel</button>
