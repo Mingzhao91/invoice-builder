@@ -1,5 +1,5 @@
 <mat-card>
-  <h2>Create Invoice</h2>
+  <h2>{{invoice ? 'Edit' : 'Create'}} Invoice</h2>
   <form class="form-container"
         [formGroup]="invoiceForm!"
         novalidate
@@ -74,7 +74,8 @@
               [disabled]="!invoiceForm?.valid">Save</button>
       <button mat-raised-button
               type="reset"
-              color="accent">Cancel</button>
+              color="accent"
+              (click)="leaveInvoiceForm()">Cancel</button>
     </div>
   </form>
 

@@ -26,7 +26,7 @@ export class InvoiceListingComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private invoiceService: InvoiceService,
-    private route: Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +41,11 @@ export class InvoiceListingComponent implements OnInit {
   }
 
   saveBtnHanlder() {
-    this.route.navigate(['dashboard', 'invoices', 'new']);
+    this.router.navigate(['dashboard', 'invoices', 'new']);
+  }
+
+  editBtnHandler(id: string) {
+    this.router.navigate(['dashboard', 'invoices', id]);
   }
 
   deleteBtnHandler(id: String) {
