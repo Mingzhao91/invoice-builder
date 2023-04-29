@@ -1,9 +1,18 @@
 <mat-toolbar>
-  <h3>Invoince</h3>
-  <div class="menu-bar">
-    <button mat-button
-            (click)="saveBtnHanlder()">New Invoice</button>
-  </div>
+  <mat-toolbar-row>
+
+    <h3>Invoince</h3>
+    <mat-form-field appearance="fill"
+                    class="filter-input">
+      <input #filterInput
+             matInput
+             placeholder="filter...">
+    </mat-form-field>
+    <div class="menu-bar">
+      <button mat-button
+              (click)="saveBtnHanlder()">New Invoice</button>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
 
@@ -109,6 +118,6 @@
                  [showFirstLastButtons]="true"
                  [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 20]"
-                 (page)="handlePageEvent($event)">
+                 (page)="handlePageEvent()">
   </mat-paginator>
 </div>
