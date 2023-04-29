@@ -47,8 +47,6 @@ export class InvoiceListingComponent
   dataSource: Invoice[] = [];
   isResultsLoading = false;
   resultsLength = 0;
-  // filterSubscription!: Subscription;
-  // invoicesSubscription!: Subscription;
   subscription!: Subscription;
 
   constructor(
