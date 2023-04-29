@@ -1,26 +1,14 @@
+// import express from "express";
+
+// import invoiceController from "../api/controllers/invoice.controller";
+
+// export const router = express.Router();
+
+// // Invoices
+// router.get("/invoices", invoiceController.findAll);
+// router.get("/invoices/:id", invoiceController.findOne);
+// router.post("/invoices", invoiceController.create);
+// router.put("/invoices/:id", invoiceController.update);
+// router.delete("/invoices/:id", invoiceController.delete);
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.router = undefined;
-
-var _express = require("express");
-
-var _express2 = _interopRequireDefault(_express);
-
-var _invoice = require("../api/controllers/invoice.controller");
-
-var _invoice2 = _interopRequireDefault(_invoice);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var router = exports.router = _express2.default.Router();
-
-// Invoices
-router.get("/invoices", _invoice2.default.findAll);
-router.get("/invoices/:id", _invoice2.default.findOne);
-router.post("/invoices", _invoice2.default.create);
-router.put("/invoices/:id", _invoice2.default.update);
-router.delete("/invoices/:id", _invoice2.default.delete);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWcvcm91dGVzLmpzIl0sIm5hbWVzIjpbInJvdXRlciIsImV4cHJlc3MiLCJSb3V0ZXIiLCJnZXQiLCJpbnZvaWNlQ29udHJvbGxlciIsImZpbmRBbGwiLCJmaW5kT25lIiwicG9zdCIsImNyZWF0ZSIsInB1dCIsInVwZGF0ZSIsImRlbGV0ZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOzs7O0FBRUE7Ozs7OztBQUVPLElBQU1BLDBCQUFTQyxrQkFBUUMsTUFBUixFQUFmOztBQUVQO0FBQ0FGLE9BQU9HLEdBQVAsQ0FBVyxXQUFYLEVBQXdCQyxrQkFBa0JDLE9BQTFDO0FBQ0FMLE9BQU9HLEdBQVAsQ0FBVyxlQUFYLEVBQTRCQyxrQkFBa0JFLE9BQTlDO0FBQ0FOLE9BQU9PLElBQVAsQ0FBWSxXQUFaLEVBQXlCSCxrQkFBa0JJLE1BQTNDO0FBQ0FSLE9BQU9TLEdBQVAsQ0FBVyxlQUFYLEVBQTRCTCxrQkFBa0JNLE1BQTlDO0FBQ0FWLE9BQU9XLE1BQVAsQ0FBYyxlQUFkLEVBQStCUCxrQkFBa0JPLE1BQWpEIiwiZmlsZSI6InJvdXRlcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBleHByZXNzIGZyb20gXCJleHByZXNzXCI7XHJcblxyXG5pbXBvcnQgaW52b2ljZUNvbnRyb2xsZXIgZnJvbSBcIi4uL2FwaS9jb250cm9sbGVycy9pbnZvaWNlLmNvbnRyb2xsZXJcIjtcclxuXHJcbmV4cG9ydCBjb25zdCByb3V0ZXIgPSBleHByZXNzLlJvdXRlcigpO1xyXG5cclxuLy8gSW52b2ljZXNcclxucm91dGVyLmdldChcIi9pbnZvaWNlc1wiLCBpbnZvaWNlQ29udHJvbGxlci5maW5kQWxsKTtcclxucm91dGVyLmdldChcIi9pbnZvaWNlcy86aWRcIiwgaW52b2ljZUNvbnRyb2xsZXIuZmluZE9uZSk7XHJcbnJvdXRlci5wb3N0KFwiL2ludm9pY2VzXCIsIGludm9pY2VDb250cm9sbGVyLmNyZWF0ZSk7XHJcbnJvdXRlci5wdXQoXCIvaW52b2ljZXMvOmlkXCIsIGludm9pY2VDb250cm9sbGVyLnVwZGF0ZSk7XHJcbnJvdXRlci5kZWxldGUoXCIvaW52b2ljZXMvOmlkXCIsIGludm9pY2VDb250cm9sbGVyLmRlbGV0ZSk7XHJcbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWcvcm91dGVzLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUVBOztBQUVBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiJyb3V0ZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBpbXBvcnQgZXhwcmVzcyBmcm9tIFwiZXhwcmVzc1wiO1xyXG5cclxuLy8gaW1wb3J0IGludm9pY2VDb250cm9sbGVyIGZyb20gXCIuLi9hcGkvY29udHJvbGxlcnMvaW52b2ljZS5jb250cm9sbGVyXCI7XHJcblxyXG4vLyBleHBvcnQgY29uc3Qgcm91dGVyID0gZXhwcmVzcy5Sb3V0ZXIoKTtcclxuXHJcbi8vIC8vIEludm9pY2VzXHJcbi8vIHJvdXRlci5nZXQoXCIvaW52b2ljZXNcIiwgaW52b2ljZUNvbnRyb2xsZXIuZmluZEFsbCk7XHJcbi8vIHJvdXRlci5nZXQoXCIvaW52b2ljZXMvOmlkXCIsIGludm9pY2VDb250cm9sbGVyLmZpbmRPbmUpO1xyXG4vLyByb3V0ZXIucG9zdChcIi9pbnZvaWNlc1wiLCBpbnZvaWNlQ29udHJvbGxlci5jcmVhdGUpO1xyXG4vLyByb3V0ZXIucHV0KFwiL2ludm9pY2VzLzppZFwiLCBpbnZvaWNlQ29udHJvbGxlci51cGRhdGUpO1xyXG4vLyByb3V0ZXIuZGVsZXRlKFwiL2ludm9pY2VzLzppZFwiLCBpbnZvaWNlQ29udHJvbGxlci5kZWxldGUpO1xyXG4iXX0=
