@@ -25,6 +25,7 @@ export class InvoiceListingComponent implements OnInit {
     'action',
   ];
   dataSource: Invoice[] = [];
+  isResultsLoading = false;
   resultsLength = 0;
 
   constructor(
@@ -50,14 +51,17 @@ export class InvoiceListingComponent implements OnInit {
       perPage: number;
     } = { page: 1, perPage: 10 }
   ) {
+    this.isResultsLoading = true;
     this.invoiceService.getInvoices({ page, perPage }).subscribe({
       next: (data) => {
         console.log(data);
         this.dataSource = data.docs;
         this.resultsLength = data.totalDocs;
+        this.isResultsLoading = false;
       },
       error: () => {
         this.openSnackBar('Failed to retrieve invoices!', 'Error');
+        this.isResultsLoading = false;
       },
     });
   }

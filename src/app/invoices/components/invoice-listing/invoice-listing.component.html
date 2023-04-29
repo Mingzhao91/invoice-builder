@@ -6,8 +6,17 @@
   </div>
 </mat-toolbar>
 
+
 <div class="table-container mat-elevation-z8">
-  <table mat-table
+  <div *ngIf="isResultsLoading"
+       class="mat-elevation-z8">
+    <div class="loading-shade">
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+  </div>
+
+  <table *ngIf="!isResultsLoading"
+         mat-table
          [dataSource]="dataSource"
          class="mat-elevation-z8">
 
