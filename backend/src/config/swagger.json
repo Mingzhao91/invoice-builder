@@ -73,6 +73,24 @@
             "type": "integer",
             "description": "Define the limit for the records",
             "in": "query"
+          },
+          {
+            "name": "filter",
+            "type": "string",
+            "description": "Filter the invoices",
+            "in": "query"
+          },
+          {
+            "name": "sortField",
+            "type": "string",
+            "description": "Define the sortField for sorting i.e item,date,due",
+            "in": "query"
+          },
+          {
+            "name": "sortDir",
+            "type": "string",
+            "description": "Define the sortDir i.e asc,desc",
+            "in": "query"
           }
         ],
         "responses": {
