@@ -32,7 +32,7 @@ export class InvoiceListingComponent implements OnInit {
   ngOnInit(): void {
     this.invoiceService.getInvoices().subscribe({
       next: (data) => {
-        this.dataSource = data;
+        this.dataSource = data.docs;
       },
       error: () => {
         this.openSnackBar('Failed to retrieve invoices!', 'Error');

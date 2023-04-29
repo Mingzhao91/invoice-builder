@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Invoice } from '../models/invoice';
+import { Invoice, InvoicePaginationRsp } from '../models/invoice';
 
 const BASE_URL = 'http://localhost:3000/api';
 
@@ -12,8 +12,8 @@ const BASE_URL = 'http://localhost:3000/api';
 export class InvoiceService {
   constructor(private http: HttpClient) {}
 
-  getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(`${BASE_URL}/invoices`);
+  getInvoices(): Observable<InvoicePaginationRsp> {
+    return this.http.get<InvoicePaginationRsp>(`${BASE_URL}/invoices`);
   }
 
   createInvoice(body: Invoice): Observable<Invoice> {

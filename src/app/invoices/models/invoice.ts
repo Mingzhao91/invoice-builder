@@ -7,3 +7,11 @@ export class Invoice {
   tax!: number;
   rate!: number;
 }
+
+export class InvoicePaginationRsp {
+  docs!: Invoice[];
+  total!: number;
+  pages!: number;
+  page!: number;
+  limit!: number;
+}
