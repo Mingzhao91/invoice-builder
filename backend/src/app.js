@@ -5,8 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger.json";
 import cors from "cors";
-
-import { router } from "./config/routes";
+import { restRouter } from "./api/index";
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/invoice-builder");
@@ -25,7 +24,7 @@ app.use(
     explorer: true,
   })
 );
-app.use("/api", router);
+app.use("/api", restRouter);
 app.use((req, res, next) => {
   const error = new Error("Not Found!");
   error.message = "Invalid Route";

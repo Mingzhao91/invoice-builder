@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { StatusCodes } from "http-status-codes";
 
-import Invoice from "../models/invoice.model";
+import Invoice from "./invoice.model";
 
 export default {
   findAll(req, res, next) {
