@@ -1,6 +1,6 @@
 import express from "express";
 
-import { invoiceRouter } from "./resources/invoice/invoice.router";
+import { invoiceRouter } from "./resources/invoice";
 
 export const restRouter = express.Router();
 
