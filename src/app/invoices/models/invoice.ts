@@ -10,8 +10,8 @@ export class Invoice {
 
 export class InvoicePaginationRsp {
   docs!: Invoice[];
-  total!: number;
-  pages!: number;
+  totalDocs!: number;
+  totalPages!: number;
   page!: number;
   limit!: number;
 }
