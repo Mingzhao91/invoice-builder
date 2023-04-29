@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { remove } from 'lodash';
 
 import { InvoiceService } from '../../services/invoice.service';
@@ -12,7 +13,8 @@ import { Invoice } from '../../models/invoice';
   templateUrl: './invoice-listing.component.html',
   styleUrls: ['./invoice-listing.component.scss'],
 })
-export class InvoiceListingComponent implements OnInit {
+export class InvoiceListingComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = [
@@ -34,36 +36,41 @@ export class InvoiceListingComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.populateInvoices();
+  }
+
+  onSortChange() {
     this.populateInvoices();
   }
 
   handlePageEvent(event: PageEvent) {
-    this.populateInvoices({ page: ++event.pageIndex, perPage: event.pageSize });
+    this.populateInvoices();
   }
 
-  populateInvoices(
-    {
-      page,
-      perPage,
-    }: {
-      page: number;
-      perPage: number;
-    } = { page: 1, perPage: 10 }
-  ) {
+  populateInvoices() {
     this.isResultsLoading = true;
-    this.invoiceService.getInvoices({ page, perPage }).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.dataSource = data.docs;
-        this.resultsLength = data.totalDocs;
-        this.isResultsLoading = false;
-      },
-      error: () => {
-        this.openSnackBar('Failed to retrieve invoices!', 'Error');
-        this.isResultsLoading = false;
-      },
-    });
+    this.invoiceService
+      .getInvoices({
+        page: this.paginator.pageIndex,
+        perPage: this.paginator.pageSize,
+        sortField: this.sort.active,
+        sortDir: this.sort.direction,
+      })
+      .subscribe({
+        next: (data) => {
+          this.paginator.pageIndex = 0;
+          this.dataSource = data.docs;
+          this.resultsLength = data.totalDocs;
+          this.isResultsLoading = false;
+        },
+        error: () => {
+          this.openSnackBar('Failed to retrieve invoices!', 'Error');
+          this.isResultsLoading = false;
+        },
+      });
   }
 
   saveBtnHanlder() {

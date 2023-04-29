@@ -15,13 +15,23 @@ export class InvoiceService {
   getInvoices({
     page,
     perPage,
+    sortField,
+    sortDir,
   }: {
     page: number;
     perPage: number;
+    sortField: string;
+    sortDir: string;
   }): Observable<InvoicePaginationRsp> {
-    return this.http.get<InvoicePaginationRsp>(
-      `${BASE_URL}/invoices?page=${page}&perPage=${perPage}`
-    );
+    let queryString = `${BASE_URL}/invoices?page=${
+      page + 1
+    }&perPage=${perPage}`;
+
+    if (sortField && sortDir) {
+      queryString += `&sortField=${sortField}&sortDir=${sortDir}`;
+    }
+
+    return this.http.get<InvoicePaginationRsp>(queryString);
   }
 
   createInvoice(body: Invoice): Observable<Invoice> {

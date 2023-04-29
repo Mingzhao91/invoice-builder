@@ -15,28 +15,35 @@
     </div>
   </div>
 
-  <table *ngIf="!isResultsLoading"
+  <table class="mat-elevation-z8"
          mat-table
+         matSort
          [dataSource]="dataSource"
-         class="mat-elevation-z8">
+         (matSortChange)="onSortChange()">
 
     <ng-container matColumnDef="item">
       <th mat-header-cell
-          *matHeaderCellDef> Item </th>
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by item"> Item </th>
       <td mat-cell
           *matCellDef="let invoice"> {{invoice.item}} </td>
     </ng-container>
 
     <ng-container matColumnDef="date">
       <th mat-header-cell
-          *matHeaderCellDef> Date </th>
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by date"> Date </th>
       <td mat-cell
           *matCellDef="let invoice"> {{invoice.date | date}} </td>
     </ng-container>
 
     <ng-container matColumnDef="due">
       <th mat-header-cell
-          *matHeaderCellDef> Due </th>
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by due"> Due </th>
       <td mat-cell
           *matCellDef="let invoice"> {{invoice.due | date}} </td>
     </ng-container>
