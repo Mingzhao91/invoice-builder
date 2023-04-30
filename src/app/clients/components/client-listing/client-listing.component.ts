@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
 import { ClientService } from '../../services/client.service';
 import { Client } from '../../models/client';
+import { ClientDialogFormComponent } from '../client-dialog-form/client-dialog-form.component';
 
 @Component({
   selector: 'app-client-listing',
@@ -18,7 +24,7 @@ export class ClientListingComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-
+    public dialog: MatDialog,
     private clientService: ClientService
   ) {}
 
@@ -43,6 +49,21 @@ export class ClientListingComponent implements OnInit {
   }
 
   saveBtnHanlder() {}
+
+  animal!: string;
+  name!: string;
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ClientDialogFormComponent, {
+      width: '400px',
+      height: '300px',
+      data: { name: this.name, animal: this.animal },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);

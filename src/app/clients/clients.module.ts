@@ -6,9 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../shared/material.module';
 
 import { ClientListingComponent } from './components/client-listing/client-listing.component';
+import { ClientDialogFormComponent } from './components/client-dialog-form/client-dialog-form.component';
 
 @NgModule({
-  declarations: [ClientListingComponent],
+  declarations: [ClientListingComponent, ClientDialogFormComponent],
   imports: [CommonModule, FormsModule, MaterialModule, HttpClientModule],
   exports: [ClientListingComponent],
 })
