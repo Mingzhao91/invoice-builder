@@ -90,7 +90,7 @@ export default {
     }
 
     const { id } = req.params;
-    Invoice.findByIdAndUpdate(id, value)
+    Invoice.findByIdAndUpdate(id, value, { new: true })
       .then((invoice) => {
         if (!invoice) {
           return res
