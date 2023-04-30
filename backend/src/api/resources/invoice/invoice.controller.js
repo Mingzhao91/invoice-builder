@@ -9,6 +9,7 @@ export default {
     const options = {
       page: parseInt(page, 10),
       limit: parseInt(perPage, 10),
+      populate: "client",
     };
     const query = {};
     if (filter) {
@@ -83,6 +84,7 @@ export default {
       qty: Joi.number().integer().optional(),
       tax: Joi.number().optional(),
       rate: Joi.number().optional(),
+      client: Joi.string().optional(),
     });
 
     const { error, value } = schema.validate(req.body);
