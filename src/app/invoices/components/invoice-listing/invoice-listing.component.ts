@@ -47,7 +47,7 @@ export class InvoiceListingComponent
   dataSource: Invoice[] = [];
   isResultsLoading = false;
   resultsLength = 0;
-  subscription!: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -136,6 +136,6 @@ export class InvoiceListingComponent
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 }
