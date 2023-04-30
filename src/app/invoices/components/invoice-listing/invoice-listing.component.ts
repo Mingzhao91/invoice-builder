@@ -18,9 +18,7 @@ import {
   Subscription,
   debounceTime,
   distinctUntilChanged,
-  filter,
   fromEvent,
-  tap,
 } from 'rxjs';
 
 @Component({
