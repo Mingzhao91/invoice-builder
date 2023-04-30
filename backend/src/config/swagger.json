@@ -176,7 +176,7 @@
   "definitions": {
     "Invoice": {
       "required": [
-        "item, qty, date, due"
+        "item, qty, date, due, client"
       ],
       "properties": {
         "_id": {
@@ -205,6 +205,9 @@
         "tax": {
           "type": "number",
           "format": "float"
+        },
+        "client": {
+          "type": "string"
         }
       }
     },
@@ -232,6 +235,9 @@
         "tax": {
           "type": "number",
           "format": "float"
+        },
+        "client": {
+          "type": "string"
         }
       }
     },
