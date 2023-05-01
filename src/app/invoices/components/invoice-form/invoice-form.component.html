@@ -39,6 +39,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+      <mat-label>Select Client</mat-label>
+      <mat-select formControlName="client">
+        <mat-option *ngFor="let client of clients"
+                    [value]="client._id">
+          {{client.firstName}} {{client.lastName}} - {{client.email}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="invoiceForm!.controls['client'].touched && invoiceForm!.controls['client'].invalid">Client is
+        required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Quantity</mat-label>
 
       <input matInput
@@ -64,6 +76,8 @@
              type="number"
              formControlName="rate">
     </mat-form-field>
+
+
 
     <div>
       <button mat-raised-button

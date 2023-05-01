@@ -11,7 +11,9 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { InvoiceService } from '../../services/invoice.service';
+import { ClientService } from 'src/app/clients/services/client.service';
 import { Invoice } from '../../models/invoice';
+import { Client } from 'src/app/clients/models/client';
 
 export const MY_DATE_FORMAT = {
   parse: {
@@ -41,18 +43,32 @@ export const MY_DATE_FORMAT = {
 export class InvoiceFormComponent implements OnInit {
   invoiceForm?: FormGroup;
   invoice?: Invoice;
+  clients: Client[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.setInvoiceToForm();
+    this.setClients();
+  }
+
+  setClients() {
+    this.clientService.getClients().subscribe({
+      next: (data) => {
+        this.clients = data;
+      },
+      error: () => {
+        this.openSnackBar('Failed to get clients!', 'Error');
+      },
+    });
   }
 
   openSnackBar(message: string, action: string) {
@@ -64,9 +80,10 @@ export class InvoiceFormComponent implements OnInit {
       item: ['', Validators.required],
       date: ['', Validators.required],
       due: ['', Validators.required],
-      qty: [0, Validators.required],
-      rate: [0],
-      tax: [0],
+      qty: ['', Validators.required],
+      client: ['', Validators.required],
+      rate: [''],
+      tax: [''],
     });
 
     this.invoiceForm.controls['item'].invalid;
