@@ -30,6 +30,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button
+          [disabled]="!clientForm.valid"
           [mat-dialog-close]="clientForm.value"
           cdkFocusInitial>
     Save
