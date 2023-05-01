@@ -18,7 +18,7 @@ export interface DialogData {
 export class ClientDialogFormComponent implements OnInit, OnDestroy {
   clientForm!: FormGroup;
   subscription: Subscription = new Subscription();
-  title = 'Create Client';
+  title = 'New Client';
 
   constructor(
     public dialogRef: MatDialogRef<ClientDialogFormComponent>,

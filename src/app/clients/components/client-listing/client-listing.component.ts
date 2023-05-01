@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Subscription, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
+import { remove } from 'lodash';
 
 import { ClientService } from '../../services/client.service';
 import { Client } from '../../models/client';
@@ -49,7 +50,20 @@ export class ClientListingComponent implements OnInit {
   }
 
   deleteBtnHandler(clientId: string) {
-    console.log(clientId);
+    this.subscription.add(
+      this.clientService.deleteClient(clientId).subscribe({
+        next: (data) => {
+          remove(this.dataSource, (item) => {
+            return item._id === data._id;
+          });
+          this.dataSource = [...this.dataSource];
+          this.openSnackBar('Client deleted', 'Success');
+        },
+        error: () => {
+          this.openSnackBar('Failed to delete a client!', 'Error');
+        },
+      })
+    );
   }
 
   openDialog(clientId: string): void {
