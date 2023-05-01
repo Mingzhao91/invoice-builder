@@ -3,7 +3,7 @@
     <h3>Clients</h3>
     <div class="menu-bar">
       <button mat-button
-              (click)="saveBtnHanlder()">New Client</button>
+              (click)="openDialog()">New Client</button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -74,20 +74,3 @@
 
   </table>
 </div>
-
-<ol>
-  <li>
-    <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
-      <input matInput
-             [(ngModel)]="name">
-    </mat-form-field>
-  </li>
-  <li>
-    <button mat-raised-button
-            (click)="openDialog()">Pick one</button>
-  </li>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
-  </li>
-</ol>

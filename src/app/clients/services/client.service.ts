@@ -15,4 +15,8 @@ export class ClientService {
   getClients(): Observable<Client[]> {
     return this.http.get<Client[]>(`${BASE_URL}/clients`);
   }
+
+  createClient(body: Client): Observable<Client> {
+    return this.http.post<Client>(`${BASE_URL}/clients`, body);
+  }
 }

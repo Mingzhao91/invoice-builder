@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Subscription, of } from 'rxjs';
+import { switchMap, filter } from 'rxjs/operators';
 
 import { ClientService } from '../../services/client.service';
 import { Client } from '../../models/client';
@@ -41,7 +38,7 @@ export class ClientListingComponent implements OnInit {
           this.isResultsLoading = false;
         },
         error: (err) => {
-          this.openSnackBar('Failed to retrieve invoices!', 'Error');
+          this.openSnackBar('Failed to retrieve clients!', 'Error');
           this.isResultsLoading = false;
         },
       })
@@ -50,19 +47,29 @@ export class ClientListingComponent implements OnInit {
 
   saveBtnHanlder() {}
 
-  animal!: string;
-  name!: string;
   openDialog(): void {
     const dialogRef = this.dialog.open(ClientDialogFormComponent, {
       width: '400px',
-      height: '300px',
-      data: { name: this.name, animal: this.animal },
+      height: '350px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter((clientParam) => typeof clientParam !== undefined),
+        switchMap((result) => {
+          return this.clientService.createClient(result);
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.dataSource = [data as Client, ...this.dataSource];
+          this.openSnackBar('Client created!', 'Success');
+        },
+        error: () => {
+          this.openSnackBar('Failed to create client!', 'Error');
+        },
+      });
   }
 
   openSnackBar(message: string, action: string) {
