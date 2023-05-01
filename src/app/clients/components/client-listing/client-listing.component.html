@@ -3,7 +3,7 @@
     <h3>Clients</h3>
     <div class="menu-bar">
       <button mat-button
-              (click)="openDialog()">New Client</button>
+              (click)="openDialog('')">New Client</button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -16,7 +16,8 @@
     </div>
   </div>
 
-  <table class="mat-elevation-z8"
+  <table #clientTable
+         class="mat-elevation-z8"
          mat-table
          matSort
          [dataSource]="dataSource">
@@ -54,11 +55,13 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item
+                  (click)="openDialog(client._id)">
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item
+                  (click)="deleteBtnHandler(client._id)">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
           </button>

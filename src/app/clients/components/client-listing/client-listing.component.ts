@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { Subscription, of } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
 
@@ -14,6 +15,8 @@ import { ClientDialogFormComponent } from '../client-dialog-form/client-dialog-f
   styleUrls: ['./client-listing.component.scss'],
 })
 export class ClientListingComponent implements OnInit {
+  @ViewChild('clientTable') clientTable!: MatTable<any>;
+
   subscription: Subscription = new Subscription();
   isResultsLoading = false;
   dataSource: Client[] = [];
@@ -37,7 +40,7 @@ export class ClientListingComponent implements OnInit {
           this.dataSource = data;
           this.isResultsLoading = false;
         },
-        error: (err) => {
+        error: () => {
           this.openSnackBar('Failed to retrieve clients!', 'Error');
           this.isResultsLoading = false;
         },
@@ -45,29 +48,56 @@ export class ClientListingComponent implements OnInit {
     );
   }
 
-  saveBtnHanlder() {}
+  deleteBtnHandler(clientId: string) {
+    console.log(clientId);
+  }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ClientDialogFormComponent, {
+  openDialog(clientId: string): void {
+    const options = {
       width: '400px',
       height: '350px',
-    });
+      data: {},
+    };
+
+    if (clientId) {
+      options.data = { clientId };
+    }
+
+    const dialogRef = this.dialog.open(ClientDialogFormComponent, options);
 
     dialogRef
       .afterClosed()
       .pipe(
-        filter((clientParam) => typeof clientParam !== undefined),
+        filter((clientParam) => typeof clientParam === 'object'),
         switchMap((result) => {
-          return this.clientService.createClient(result);
+          return clientId
+            ? this.clientService.updateClient(clientId, result)
+            : this.clientService.createClient(result);
         })
       )
       .subscribe({
         next: (data) => {
-          this.dataSource = [data as Client, ...this.dataSource];
-          this.openSnackBar('Client created!', 'Success');
+          if (clientId) {
+            let clientToUpdateIndex = this.dataSource.findIndex(
+              (client) => client._id === clientId
+            );
+
+            if (clientToUpdateIndex >= 0) {
+              this.dataSource[clientToUpdateIndex] = data;
+              this.clientTable.renderRows();
+            }
+
+            this.openSnackBar('Client updated!', 'Success');
+          } else {
+            this.dataSource = [data as Client, ...this.dataSource];
+            this.openSnackBar('Client created!', 'Success');
+          }
         },
         error: () => {
-          this.openSnackBar('Failed to create client!', 'Error');
+          this.openSnackBar(
+            `Failed to ${clientId ? 'update' : 'create'} client!`,
+            'Error'
+          );
         },
       });
   }
