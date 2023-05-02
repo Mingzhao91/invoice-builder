@@ -1,12 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
-import logger from "morgan";
 import { StatusCodes } from "http-status-codes";
-import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./config/swagger.json";
-import cors from "cors";
+
 import { restRouter } from "./api/index";
 import { devConfig } from "./config/env/development";
+import { setGlobalMiddleware } from "./api/middlewares/global-middleware";
 
 mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://localhost/${devConfig.database}`);
@@ -14,17 +12,9 @@ mongoose.connect(`mongodb://localhost/${devConfig.database}`);
 const app = express();
 const PORT = devConfig.port;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use(logger("dev"));
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    explorer: true,
-  })
-);
+// register global middleware
+setGlobalMiddleware(app);
+
 app.use("/api", restRouter);
 app.use((req, res, next) => {
   const error = new Error("Not Found!");
