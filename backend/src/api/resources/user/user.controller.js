@@ -12,7 +12,7 @@ export default {
       }
 
       const user = await User.create(value);
-      return res.json(user);
+      return res.json({ success: true, message: "User create successfully" });
     } catch (err) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
     }
