@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 import userService from "./user.service";
 import User from "./user.model";
+import { devConfig } from "../../../config/env/development";
 
 export default {
   async signup(req, res) {
@@ -44,7 +45,9 @@ export default {
           .status(StatusCodes.UNAUTHORIZED)
           .json({ err: "invalid credential" });
       }
-      const token = jwt.sign({ id: user._id }, "123456", { expiresIn: "1d" });
+      const token = jwt.sign({ id: user._id }, devConfig.secret, {
+        expiresIn: "1d",
+      });
       return res.json({ success: true, token });
     } catch (err) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
