@@ -1,5 +1,20 @@
+import { StatusCodes } from "http-status-codes";
+
+import userService from "./user.service";
+import User from "./user.model";
+
 export default {
   async signup(req, res) {
-    return res.json({ msg: "signup" });
+    try {
+      const { value, error } = userService.validateSchema(req.body);
+      if (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json(error);
+      }
+
+      const user = await User.create(value);
+      return res.json(user);
+    } catch (err) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
   },
 };
