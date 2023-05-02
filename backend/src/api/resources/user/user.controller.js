@@ -53,4 +53,8 @@ export default {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
     }
   },
+
+  async test(req, res) {
+    return res.json(req.user);
+  },
 };
