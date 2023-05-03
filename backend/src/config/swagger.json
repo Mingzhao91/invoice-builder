@@ -22,6 +22,10 @@
     {
       "name": "Clients",
       "description": "API for Client"
+    },
+    {
+      "name": "Users",
+      "description": "API for User"
     }
   ],
   "schemes": [
@@ -29,6 +33,68 @@
   ],
   "consumes": "application/json",
   "paths": {
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new account",
+        "description": "Create new user in the system",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User that we want to create",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Signup Successfully!",
+            "schema": {
+              "$ref": "#definitions/UserSignupRsp"
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login the account",
+        "description": "Login to the account",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User credentials",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Successfully!",
+            "schema": {
+              "$ref": "#definitions/UserLoginRsp"
+            }
+          }
+        }
+      }
+    },
     "/clients": {
       "post": {
         "tags": [
@@ -45,6 +111,13 @@
             "schema": {
               "$ref": "#definitions/Client"
             }
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "produces": [
@@ -65,6 +138,15 @@
         ],
         "summary": "Find all Clients from the server",
         "description": "All clients",
+        "parameters": [
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Okay",
@@ -82,6 +164,13 @@
           "in": "path",
           "description": "Id of the Client",
           "type": "string"
+        },
+        {
+          "name": "authorization",
+          "description": "Access token to authorize the user",
+          "in": "header",
+          "type": "string",
+          "required": true
         }
       ],
       "get": {
@@ -160,6 +249,13 @@
             "schema": {
               "$ref": "#definitions/Invoice"
             }
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "produces": [
@@ -210,6 +306,13 @@
             "type": "string",
             "description": "Define the sortDir i.e asc,desc",
             "in": "query"
+          },
+          {
+            "name": "authorization",
+            "description": "Access token to authorize the user",
+            "in": "header",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -229,6 +332,13 @@
           "in": "path",
           "description": "Id of the Invoice",
           "type": "string"
+        },
+        {
+          "name": "authorization",
+          "description": "Access token to authorize the user",
+          "in": "header",
+          "type": "string",
+          "required": true
         }
       ],
       "get": {
@@ -293,6 +403,44 @@
     }
   },
   "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserSignupRsp": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLoginRsp": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
     "Client": {
       "required": [
         "firstName",
