@@ -24,7 +24,6 @@ export class ClientDialogFormComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ClientDialogFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
-
     private fb: FormBuilder,
     private clientService: ClientService
   ) {}
