@@ -1,4 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { JwtService } from '../../../core/services/jwt.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,7 +12,12 @@ export class ToolbarComponent implements OnInit {
   @Input() showMenuIcon!: boolean;
   @Output() toggleSidenav = new EventEmitter<void>();
 
-  constructor() {}
+  constructor(private router: Router, private jwtService: JwtService) {}
 
   ngOnInit(): void {}
+
+  logout() {
+    this.jwtService.destroyToken();
+    this.router.navigate(['/login']);
+  }
 }
