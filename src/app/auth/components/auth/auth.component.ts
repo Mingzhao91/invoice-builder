@@ -13,6 +13,8 @@ import { JwtService } from '../../../core/services/jwt.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
+  title = '';
+  isLogin = true;
   authForm!: FormGroup;
   subscription: Subscription = new Subscription();
 
@@ -26,6 +28,8 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.isLogin = this.router.url === '/login';
+    this.title = this.isLogin ? 'Login' : 'Sign Up';
   }
 
   initForm() {
@@ -36,18 +40,30 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.authForm.value);
-    this.subscription.add(
-      this.authService.login(this.authForm.value).subscribe({
-        next: (data) => {
-          this.JWTService.setToken(data.token);
-          this.router.navigate(['dashboard', 'invoices']);
-        },
-        error: () => {
-          this.openSnackBar('Unable to login!', 'Error');
-        },
-      })
-    );
+    if (this.isLogin) {
+      this.subscription.add(
+        this.authService.login(this.authForm.value).subscribe({
+          next: (data) => {
+            this.JWTService.setToken(data.token);
+            this.router.navigate(['dashboard', 'invoices']);
+          },
+          error: () => {
+            this.openSnackBar('Oops, something went wrong!', 'Error');
+          },
+        })
+      );
+    } else {
+      this.subscription.add(
+        this.authService.signup(this.authForm.value).subscribe({
+          next: () => {
+            this.router.navigate(['dashboard', 'invoices']);
+          },
+          error: () => {
+            this.openSnackBar('Oops, something went wrong!!', 'Error');
+          },
+        })
+      );
+    }
   }
 
   openSnackBar(message: string, action: string) {

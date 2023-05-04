@@ -2,7 +2,7 @@
   <div class="container-login">
     <mat-card>
       <mat-card-title>
-        Login
+        {{title}}
       </mat-card-title>
       <mat-card-content>
         <form class="form-container"
@@ -30,10 +30,24 @@
           <div>
             <button mat-raised-button
                     type="submit"
-                    [disabled]="!authForm?.valid">Login</button>
+                    [disabled]="!authForm?.valid">{{title}}</button>
           </div>
         </form>
       </mat-card-content>
+
+      <div *ngIf="isLogin"
+           class="alternative">
+        <p>Don't have an account?</p>
+        <button mat-raised-button
+                [routerLink]="['/signup']">Sign Up</button>
+      </div>
+
+      <div *ngIf="!isLogin"
+           class="alternative">
+        <p>Have an account?</p>
+        <button mat-raised-button
+                [routerLink]="['/login']">Login</button>
+      </div>
     </mat-card>
   </div>
 </div>

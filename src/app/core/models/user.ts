@@ -8,3 +8,8 @@ export interface LoginRsp {
   success: boolean;
   token: string;
 }
+
+export interface SignUpResp {
+  success: boolean;
+  message: string;
+}
