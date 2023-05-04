@@ -1,6 +1,13 @@
 <div class="limiter">
   <div class="container-login">
     <mat-card>
+      <div *ngIf="isLoading"
+           class="mat-elevation-z8">
+        <div class="loading-shade">
+          <mat-spinner color="accent"></mat-spinner>
+        </div>
+      </div>
+
       <mat-card-title>
         {{title}}
       </mat-card-title>

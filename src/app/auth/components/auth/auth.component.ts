@@ -15,6 +15,7 @@ import { JwtService } from '../../../core/services/jwt.service';
 export class AuthComponent implements OnInit, OnDestroy {
   title = '';
   isLogin = true;
+  isLoading = false;
   authForm!: FormGroup;
   subscription: Subscription = new Subscription();
 
@@ -40,6 +41,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.isLoading = true;
     if (this.isLogin) {
       this.subscription.add(
         this.authService.login(this.authForm.value).subscribe({
@@ -48,6 +50,7 @@ export class AuthComponent implements OnInit, OnDestroy {
             this.router.navigate(['dashboard', 'invoices']);
           },
           error: () => {
+            this.isLoading = false;
             this.openSnackBar('Oops, something went wrong!', 'Error');
           },
         })
@@ -56,9 +59,11 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.authService.signup(this.authForm.value).subscribe({
           next: () => {
+            this.isLoading = false;
             this.router.navigate(['dashboard', 'invoices']);
           },
           error: () => {
+            this.isLoading = false;
             this.openSnackBar('Oops, something went wrong!!', 'Error');
           },
         })
