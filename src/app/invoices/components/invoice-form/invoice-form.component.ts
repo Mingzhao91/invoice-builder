@@ -90,23 +90,10 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   setInvoiceToForm() {
-    this.activatedRoute.params
-      .pipe(
-        switchMap((params) => {
-          return params['id']
-            ? this.invoiceService.getInvoice(params['id'])
-            : of(null);
-        })
-      )
-      .subscribe({
-        next: (invoice) => {
-          if (invoice) {
-            this.invoice = invoice;
-            this.invoiceForm?.patchValue(this.invoice);
-          }
-        },
-        error: () => this.openSnackBar('Failed to get an invoice!', 'Error'),
-      });
+    this.activatedRoute.data.subscribe(({ invoice }) => {
+      this.invoice = invoice as Invoice;
+      this.invoiceForm?.patchValue(this.invoice);
+    });
   }
 
   onSubmit() {
