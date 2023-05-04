@@ -50,6 +50,7 @@ export class ClientListingComponent implements OnInit {
   }
 
   deleteBtnHandler(clientId: string) {
+    this.isResultsLoading = true;
     this.subscription.add(
       this.clientService.deleteClient(clientId).subscribe({
         next: (data) => {
@@ -58,9 +59,11 @@ export class ClientListingComponent implements OnInit {
           });
           this.dataSource = [...this.dataSource];
           this.openSnackBar('Client deleted', 'Success');
+          this.isResultsLoading = false;
         },
         error: () => {
           this.openSnackBar('Failed to delete a client!', 'Error');
+          this.isResultsLoading = false;
         },
       })
     );
