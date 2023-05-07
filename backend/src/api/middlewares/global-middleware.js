@@ -52,6 +52,6 @@ export const setGlobalMiddleware = (app) => {
   );
 
   app.get("/failure", (req, res) => {
-    return res.redirect(`${devConfig.appDomain}/login`);
+    return res.redirect(`${devConfig.frontendURL}/login`);
   });
 };

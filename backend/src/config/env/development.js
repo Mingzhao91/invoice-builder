@@ -13,5 +13,5 @@ export const devConfig = {
     clientSecret: "c29573f22acad1c090992a42dd336c7df980d9e8",
     callbackURL: "http://localhost:3000/api/auth/github/callback",
   },
-  appDomain: "http://localhost:4200",
+  frontendURL: "http://localhost:4200",
 };
