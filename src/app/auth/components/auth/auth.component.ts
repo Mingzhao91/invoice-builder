@@ -33,6 +33,18 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.title = this.isLogin ? 'Login' : 'Sign Up';
   }
 
+  googleAuthHandler() {
+    return this.authService.googleAuth().subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+        this.openSnackBar('Oops, something went wrong!', 'Error');
+      },
+    });
+  }
+
   initForm() {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

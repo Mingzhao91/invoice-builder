@@ -26,3 +26,9 @@ authRouter.get(
   passport.authenticate("github", { failureRedirect: "/failure" }),
   authController.sendJWTToken
 );
+
+authRouter.get(
+  "/authenticate",
+  passport.authenticate("jwt", { session: false }),
+  authController.authenticate
+);

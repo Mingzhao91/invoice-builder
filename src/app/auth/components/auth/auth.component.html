@@ -36,8 +36,15 @@
 
           <div>
             <button mat-raised-button
+                    color="primary"
                     type="submit"
                     [disabled]="!authForm?.valid">{{title}}</button>
+
+            <a href="/api/auth/google"
+               mat-button>Google</a>
+
+            <!-- <button mat-raised-button
+                    (click)="googleAuthHandler()">Google</button> -->
           </div>
         </form>
       </mat-card-content>

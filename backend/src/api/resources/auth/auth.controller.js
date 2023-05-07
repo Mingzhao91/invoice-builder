@@ -8,6 +8,11 @@ export default {
       expiresIn: "1d",
     });
 
-    return res.json({ success: true, token });
+    // return res.json({ success: true, token });
+    res.redirect(`${devConfig.frontendURL}/dashboard/invoices?token=${token}`);
+  },
+
+  authenticate(req, res) {
+    return res.send(true);
   },
 };
