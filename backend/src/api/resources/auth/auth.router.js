@@ -19,3 +19,10 @@ authRouter.get(
   }),
   authController.sendJWTToken
 );
+
+authRouter.get("/github", passport.authenticate("github"));
+authRouter.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/failure" }),
+  authController.sendJWTToken
+);

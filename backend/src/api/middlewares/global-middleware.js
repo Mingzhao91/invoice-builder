@@ -8,6 +8,7 @@ import session from "express-session";
 import swaggerDocument from "../../config/swagger.json";
 import { configureJWTStrategy } from "./passport-jwt";
 import { configureGoogleStrategy } from "./passport-google";
+import { configureGithubStrategy } from "./passport-github";
 import { devConfig } from "../../config/env/development";
 import User from "../resources/user/user.model";
 
@@ -27,6 +28,7 @@ export const setGlobalMiddleware = (app) => {
   app.use(passport.session());
   configureJWTStrategy();
   configureGoogleStrategy();
+  configureGithubStrategy();
 
   // save user into session
   passport.serializeUser((user, done) => {
