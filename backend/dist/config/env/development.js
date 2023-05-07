@@ -1,22 +1,23 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+  value: true,
 });
-var devConfig = exports.devConfig = {
+var devConfig = (exports.devConfig = {
   port: 3000,
   database: "invoice-builder",
   secret: "123456",
   google: {
-    clientId: "601715176426-qg1mga7jjhopl261jsdaftp4acai4d0u.apps.googleusercontent.com",
+    clientId:
+      "601715176426-qg1mga7jjhopl261jsdaftp4acai4d0u.apps.googleusercontent.com",
     clientSecret: "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",
-    callbackURL: "http://localhost:3000/api/auth/google/callback"
+    callbackURL: "http://localhost:3000/api/auth/google/callback",
   },
   github: {
     clientId: "95ea793fc7d23df268d0",
     clientSecret: "c29573f22acad1c090992a42dd336c7df980d9e8",
-    callbackURL: "http://localhost:3000/api/auth/github/callback"
+    callbackURL: "http://localhost:3000/api/auth/github/callback",
   },
-  appDomain: "http://localhost:4200"
-};
+  frontendURL: "http://localhost:4200",
+});
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9jb25maWcvZW52L2RldmVsb3BtZW50LmpzIl0sIm5hbWVzIjpbImRldkNvbmZpZyIsInBvcnQiLCJkYXRhYmFzZSIsInNlY3JldCIsImdvb2dsZSIsImNsaWVudElkIiwiY2xpZW50U2VjcmV0IiwiY2FsbGJhY2tVUkwiLCJnaXRodWIiLCJhcHBEb21haW4iXSwibWFwcGluZ3MiOiI7Ozs7O0FBQU8sSUFBTUEsZ0NBQVk7QUFDdkJDLFFBQU0sSUFEaUI7QUFFdkJDLFlBQVUsaUJBRmE7QUFHdkJDLFVBQVEsUUFIZTtBQUl2QkMsVUFBUTtBQUNOQyxjQUNFLDBFQUZJO0FBR05DLGtCQUFjLHFDQUhSO0FBSU5DLGlCQUFhO0FBSlAsR0FKZTtBQVV2QkMsVUFBUTtBQUNOSCxjQUFVLHNCQURKO0FBRU5DLGtCQUFjLDBDQUZSO0FBR05DLGlCQUFhO0FBSFAsR0FWZTtBQWV2QkUsYUFBVztBQWZZLENBQWxCIiwiZmlsZSI6ImRldmVsb3BtZW50LmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IGRldkNvbmZpZyA9IHtcclxuICBwb3J0OiAzMDAwLFxyXG4gIGRhdGFiYXNlOiBcImludm9pY2UtYnVpbGRlclwiLFxyXG4gIHNlY3JldDogXCIxMjM0NTZcIixcclxuICBnb29nbGU6IHtcclxuICAgIGNsaWVudElkOlxyXG4gICAgICBcIjYwMTcxNTE3NjQyNi1xZzFtZ2E3ampob3BsMjYxanNkYWZ0cDRhY2FpNGQwdS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbVwiLFxyXG4gICAgY2xpZW50U2VjcmV0OiBcIkdPQ1NQWC1WRFFvbXFrRXJPVXZMUDRHUGJuMkF0WFA1bGxmXCIsXHJcbiAgICBjYWxsYmFja1VSTDogXCJodHRwOi8vbG9jYWxob3N0OjMwMDAvYXBpL2F1dGgvZ29vZ2xlL2NhbGxiYWNrXCIsXHJcbiAgfSxcclxuICBnaXRodWI6IHtcclxuICAgIGNsaWVudElkOiBcIjk1ZWE3OTNmYzdkMjNkZjI2OGQwXCIsXHJcbiAgICBjbGllbnRTZWNyZXQ6IFwiYzI5NTczZjIyYWNhZDFjMDkwOTkyYTQyZGQzMzZjN2RmOTgwZDllOFwiLFxyXG4gICAgY2FsbGJhY2tVUkw6IFwiaHR0cDovL2xvY2FsaG9zdDozMDAwL2FwaS9hdXRoL2dpdGh1Yi9jYWxsYmFja1wiLFxyXG4gIH0sXHJcbiAgYXBwRG9tYWluOiBcImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMFwiLFxyXG59O1xyXG4iXX0=
