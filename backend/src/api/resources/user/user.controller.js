@@ -14,7 +14,21 @@ export default {
         return res.status(StatusCodes.BAD_REQUEST).json(error);
       }
 
-      const user = await User.create(value);
+      const existingUser = await User.findOne({ "local.email": value.email });
+
+      if (existingUser) {
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ err: "You have already created an account" });
+      }
+
+      const user = await new User();
+      user.local.email = value.email;
+      const salt = await bcryptjs.genSalt();
+      const hash = await bcryptjs.hash(value.password, salt);
+      user.local.password = hash;
+      await user.save();
+
       return res.json({ success: true, message: "User created successfully" });
     } catch (err) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
@@ -28,9 +42,7 @@ export default {
         return res.status(StatusCodes.BAD_REQUEST).json(error);
       }
 
-      const user = await User.findOne({ email: value.email });
-
-      console.log("user: ", user);
+      const user = await User.findOne({ "local.email": value.email });
 
       if (!user) {
         return res
@@ -38,7 +50,10 @@ export default {
           .json({ err: "Invalid emai or password." });
       }
 
-      const matched = await bcryptjs.compare(value.password, user.password);
+      const matched = await bcryptjs.compare(
+        value.password,
+        user.local.password
+      );
 
       if (!matched) {
         res
@@ -48,6 +63,7 @@ export default {
       const token = jwt.sign({ id: user._id }, devConfig.secret, {
         expiresIn: "1d",
       });
+
       return res.json({ success: true, token });
     } catch (err) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

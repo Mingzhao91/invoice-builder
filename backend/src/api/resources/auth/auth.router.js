@@ -1,7 +1,21 @@
 import express from "express";
+import passport from "passport";
+
+import authController from "./auth.controller";
 
 export const authRouter = express.Router();
 
-authRouter.route("/test").get(function (req, res) {
-  res.json({ mgs: "working" });
-});
+authRouter.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"],
+  })
+);
+
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/failure",
+  }),
+  authController.sendJWTToken
+);
