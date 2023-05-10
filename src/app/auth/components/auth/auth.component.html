@@ -36,18 +36,23 @@
 
           <div>
             <button mat-raised-button
+                    class="btn-block"
                     color="primary"
                     type="submit"
                     [disabled]="!authForm?.valid">{{title}}</button>
 
-            <a href="/api/auth/google"
-               mat-button>Google</a>
-
-            <a href="/api/auth/github"
-               mat-button>GitHub</a>
-
-            <!-- <button mat-raised-button
-                    (click)="googleAuthHandler()">Google</button> -->
+            <a class="btn btn-social btn-block btn-google"
+               href="/api/auth/google"
+               mat-button>
+              <i class="fa fa-google"></i>
+              Login with Google
+            </a>
+            <a class="btn btn-social btn-block btn-github"
+               href="/api/auth/github"
+               mat-button>
+              <i class="fa fa-github"></i>
+              Login with GitHub
+            </a>
           </div>
         </form>
       </mat-card-content>
@@ -56,6 +61,7 @@
            class="alternative">
         <p>Don't have an account?</p>
         <button mat-raised-button
+                class="btn-block"
                 [routerLink]="['/signup']">Sign Up</button>
       </div>
 
@@ -63,6 +69,7 @@
            class="alternative">
         <p>Have an account?</p>
         <button mat-raised-button
+                class="btn-block"
                 [routerLink]="['/login']">Login</button>
       </div>
     </mat-card>
