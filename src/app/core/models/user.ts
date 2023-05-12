@@ -13,3 +13,7 @@ export interface SignUpResp {
   success: boolean;
   message: string;
 }
+
+export interface LogoutRsp {
+  success: boolean;
+}

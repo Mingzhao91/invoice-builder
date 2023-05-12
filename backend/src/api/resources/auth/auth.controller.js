@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { StatusCodes } from "http-status-codes";
 
 import { devConfig } from "../../../config/env/development";
 
@@ -14,5 +15,13 @@ export default {
 
   authenticate(req, res) {
     return res.send(true);
+  },
+
+  logout(req, res) {
+    // remove the session and remove req.currentUser
+    req.logout(function (err) {
+      if (err) res.status(StatusCodes.BAD_REQUEST).json(err);
+      return res.json({ success: true });
+    });
   },
 };
