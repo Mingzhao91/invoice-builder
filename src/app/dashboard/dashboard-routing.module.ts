@@ -33,6 +33,9 @@ const routes: Routes = [
       {
         path: 'invoices/:id/view',
         component: InvoiceViewComponent,
+        resolve: {
+          invoice: EditInvoiceResolverService,
+        },
       },
       {
         path: 'clients',
