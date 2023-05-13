@@ -29,3 +29,5 @@ invoiceRouter
     passport.authenticate("jwt", { session: false }),
     invoiceController.findOne
   );
+
+invoiceRouter.get("/:id/download", invoiceController.download);

@@ -4,6 +4,7 @@ import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 import passport from "passport";
 import session from "express-session";
+import pdf from "express-pdf";
 
 import swaggerDocument from "../../config/swagger.json";
 import { configureJWTStrategy } from "./passport-jwt";
@@ -16,6 +17,7 @@ export const setGlobalMiddleware = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cors());
+  app.use(pdf);
   app.use(logger("dev"));
   app.use(
     session({

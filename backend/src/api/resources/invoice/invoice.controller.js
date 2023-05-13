@@ -2,6 +2,7 @@ import Joi from "joi";
 import { StatusCodes } from "http-status-codes";
 
 import Invoice from "./invoice.model";
+import invoiceService from "./invoice.service";
 
 export default {
   findAll(req, res, next) {
@@ -104,5 +105,24 @@ export default {
         return res.json(invoice);
       })
       .catch((err) => res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err));
+  },
+
+  async download(req, res) {
+    try {
+      const { id } = req.params;
+      const invoice = await Invoice.findById(id).populate("client");
+
+      if (!invoice) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .send({ err: "Cound not find any invoice." });
+      }
+
+      const html = invoiceService.getInvoiceTemplate(invoice);
+      res.pdfFromHTML({ filename: `${invoice.item}.pdf`, htmlContent: html });
+    } catch (err) {
+      console.err(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
+    }
   },
 };
