@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 
 import Invoice from "./invoice.model";
 import invoiceService from "./invoice.service";
+import userService from "../user/user.service";
 
 export default {
   findAll(req, res, next) {
@@ -118,7 +119,8 @@ export default {
           .send({ err: "Cound not find any invoice." });
       }
 
-      const html = invoiceService.getInvoiceTemplate(invoice);
+      const user = userService.getUser(req.currentUser);
+      const html = invoiceService.getInvoiceTemplate(invoice, user);
       res.pdfFromHTML({ filename: `${invoice.item}.pdf`, htmlContent: html });
     } catch (err) {
       console.err(err);

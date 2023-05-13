@@ -27,4 +27,25 @@ export default {
     }
     return { value };
   },
+
+  getUser(user) {
+    let rsp = {};
+
+    if (user.local.email) {
+      rsp.name = user.local.name;
+      rsp.email = user.local.email;
+    }
+
+    if (user.google.email) {
+      rsp.name = user.google.displayName;
+      rsp.email = user.google.email;
+    }
+
+    if (user.github.email) {
+      rsp.name = user.github.displayName;
+      rsp.email = user.github.email;
+    }
+
+    return rsp;
+  },
 };

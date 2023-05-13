@@ -20,7 +20,7 @@ export default {
     return { total, subTotal };
   },
 
-  getTemplateBody(invoice) {
+  getTemplateBody(invoice, user) {
     const { subTotal, total } = this.getTotal(invoice);
     const templateBody = `
     <div class="container">
@@ -39,12 +39,12 @@ export default {
               <div class="panel panel-default">
                   <div class="panel-heading">
                       <h4>From:
-                          <a>Jane</a>
+                          <a>${user.name}</a>
                       </h4>
                   </div>
                   <div class="panel-body">
                       <p>
-                          jane_doe@gmail.com
+                          ${user.email}
                           <br>
                       </p>
                   </div>
@@ -116,8 +116,8 @@ export default {
     return templateBody;
   },
 
-  getInvoiceTemplate(invoice) {
-    const templateBody = this.getTemplateBody(invoice);
+  getInvoiceTemplate(invoice, user) {
+    const templateBody = this.getTemplateBody(invoice, user);
     const html = `
     <html>
       <head>
