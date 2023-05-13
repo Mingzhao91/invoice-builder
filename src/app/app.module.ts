@@ -9,10 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
-import {
-  TokenInterceptor,
-  ErrorInterceptor,
-} from './core/services/http-interceptor.service';
+import { TokenInterceptor } from './core/services/http-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,11 +26,6 @@ import {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
       multi: true,
     },
   ],
