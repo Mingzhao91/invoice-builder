@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { JwtService } from '../../../core/services/jwt.service';
+import { User } from '../../../core/models/user';
 
 @Component({
   selector: 'app-auth',
@@ -33,30 +34,21 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.title = this.isLogin ? 'Login' : 'Sign Up';
   }
 
-  // googleAuthHandler() {
-  //   return this.authService.googleAuth().subscribe({
-  //     next: (data) => {
-  //       console.log(data);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //       this.openSnackBar('Oops, something went wrong!', 'Error');
-  //     },
-  //   });
-  // }
-
   initForm() {
     this.authForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
+      name: '',
     });
   }
 
   onSubmit() {
     this.isLoading = true;
     if (this.isLogin) {
+      let { email, password } = this.authForm.value;
+      let user: User = { email, password };
       this.subscription.add(
-        this.authService.login(this.authForm.value).subscribe({
+        this.authService.login(user).subscribe({
           next: (data) => {
             this.JWTService.setToken(data.token);
             this.router.navigate(['dashboard', 'invoices']);
@@ -72,7 +64,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.authService.signup(this.authForm.value).subscribe({
           next: () => {
             this.isLoading = false;
-            this.router.navigate(['dashboard', 'invoices']);
+            this.openSnackBar('Signup Successful', 'Success');
+            this.router.navigate(['/login']);
           },
           error: () => {
             this.isLoading = false;
