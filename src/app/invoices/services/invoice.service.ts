@@ -55,4 +55,10 @@ export class InvoiceService {
   updateInvoice(id: String, body: Invoice): Observable<Invoice> {
     return this.http.put<Invoice>(`${BASE_URL}/invoices/${id}`, body);
   }
+
+  downloadInvoice(id: string) {
+    return this.http.get(`${BASE_URL}/invoices/${id}/download`, {
+      responseType: 'blob',
+    });
+  }
 }
