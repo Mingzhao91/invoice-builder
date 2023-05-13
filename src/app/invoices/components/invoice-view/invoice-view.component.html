@@ -33,13 +33,14 @@
         <td>{{invoice.client.email}}</td>
       </tr>
       <tr>
-        <td class="column-title">Total:</td>
-        <td>£100</td>
+        <td class="column-title">Total: </td>
+        <td>£{{total}}</td>
       </tr>
     </table>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Edit</button>
+    <button mat-button
+            [routerLink]="['/dashboard', 'invoices', invoice._id]">Edit</button>
     <button mat-button>Download</button>
   </mat-card-actions>
 </mat-card>
