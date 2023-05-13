@@ -33,15 +33,7 @@ export class InvoiceListingComponent
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('filterInput') filterInput!: ElementRef;
 
-  displayedColumns: string[] = [
-    'item',
-    'date',
-    'due',
-    'qty',
-    'tax',
-    'rate',
-    'action',
-  ];
+  displayedColumns: string[] = ['item', 'date', 'due', 'action'];
   dataSource: Invoice[] = [];
   isResultsLoading = false;
   resultsLength = 0;

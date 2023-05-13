@@ -57,27 +57,6 @@
           *matCellDef="let invoice"> {{invoice.due | date}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="qty">
-      <th mat-header-cell
-          *matHeaderCellDef> Qty </th>
-      <td mat-cell
-          *matCellDef="let invoice"> {{invoice.qty}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="tax">
-      <th mat-header-cell
-          *matHeaderCellDef> Tax </th>
-      <td mat-cell
-          *matCellDef="let invoice"> {{invoice.tax}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="rate">
-      <th mat-header-cell
-          *matHeaderCellDef> Rate </th>
-      <td mat-cell
-          *matCellDef="let invoice"> {{invoice.rate}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="action">
       <th mat-header-cell
           *matHeaderCellDef> Action </th>
@@ -91,10 +70,17 @@
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item
+                  [routerLink]="[invoice._id,  'view']">
+            <mat-icon>pageview</mat-icon>
+            <span>View</span>
+          </button>
+
+          <button mat-menu-item
                   (click)="editBtnHandler(invoice._id)">
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
           </button>
+
           <button mat-menu-item
                   (click)="deleteBtnHandler(invoice._id)">
             <mat-icon>delete</mat-icon>
