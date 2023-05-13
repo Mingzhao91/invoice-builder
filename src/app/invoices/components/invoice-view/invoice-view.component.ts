@@ -13,6 +13,7 @@ import { InvoiceService } from '../../services/invoice.service';
 export class InvoiceViewComponent implements OnInit {
   invoice!: Invoice;
   total!: number;
+  isLoading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,14 +42,16 @@ export class InvoiceViewComponent implements OnInit {
   }
 
   downloadHandler(id: string) {
+    this.isLoading = true;
     this.invoiceService.downloadInvoice(id).subscribe({
       next: (data) => {
         console.log(data);
-
+        this.isLoading = false;
         saveAs(data, this.invoice.item);
       },
       error: (err) => {
         console.log(err);
+        this.isLoading = false;
       },
     });
   }
