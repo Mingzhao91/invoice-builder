@@ -28,6 +28,18 @@ export default {
     return { value };
   },
 
+  validateForgotPasswordSchema(body) {
+    const schema = Joi.object({
+      email: Joi.string().email().required(),
+    });
+
+    const { error, value } = schema.validate(body);
+    if (error) {
+      return { error };
+    }
+    return { value };
+  },
+
   getUser(user) {
     let rsp = {};
 

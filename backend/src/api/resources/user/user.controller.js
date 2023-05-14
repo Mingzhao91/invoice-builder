@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import userService from "./user.service";
 import User from "./user.model";
 import { devConfig } from "../../../config/env/development";
+import { getJWTToken } from "../../modules/utils";
 
 export default {
   async signup(req, res) {
@@ -71,7 +72,45 @@ export default {
     }
   },
 
-  async test(req, res) {
-    return res.json(req.currentUser);
+  async forgotPassword(req, res) {
+    try {
+      const { value, error } = userService.validateForgotPasswordSchema(
+        req.body
+      );
+      if (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json(error);
+      }
+      const criteria = {
+        $or: [
+          {
+            "google.email": value.email,
+          },
+          {
+            "github.email": value.email,
+          },
+          {
+            "local.email": value.email,
+          },
+        ],
+      };
+
+      const user = await User.findOne(criteria);
+      if (!user) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ err: "User does not exist" });
+      }
+
+      const token = getJWTToken({ id: user._id });
+
+      const resetLink = `
+      <h4>Please click on the link to reset the password</h4>
+      <a href='${devConfig.frontendURL}/reset-password/${token}'></a>
+      `;
+
+      return res.json(resetLink);
+    } catch (err) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
   },
 };

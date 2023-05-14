@@ -5,3 +5,4 @@ export const userRounter = express.Router();
 
 userRounter.post("/signup", userController.signup);
 userRounter.post("/login", userController.login);
+userRounter.post("/forgot-password", userController.forgotPassword);
