@@ -76,7 +76,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
   }
 
-  forgotPasswordHandler() {}
+  forgotPasswordHandler() {
+    this.router.navigate(['/forgot-password']);
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);
