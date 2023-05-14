@@ -49,6 +49,9 @@
                     type="submit"
                     [disabled]="!authForm?.valid">{{title}}</button>
 
+            <a class="btn btn-block forgot-password"
+               (click)="forgotPasswordHandler()">Forgot Password</a>
+
             <a class="btn btn-social btn-block btn-google"
                href="/api/auth/google"
                mat-button>

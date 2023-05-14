@@ -76,6 +76,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
   }
 
+  forgotPasswordHandler() {}
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action);
   }
