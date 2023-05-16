@@ -109,16 +109,11 @@ export default {
       `;
 
       const sanitisedUser = userService.getUser(user);
-
-      console.log("before send email");
-
       const results = await sendEmail({
         html: resetLink,
         subject: "Forgot Password",
         email: sanitisedUser.email,
       });
-
-      console.log("results: ", results);
 
       return res.json(results);
     } catch (err) {
