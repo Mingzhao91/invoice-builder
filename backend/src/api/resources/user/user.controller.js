@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import userService from "./user.service";
 import User from "./user.model";
 import { devConfig } from "../../../config/env/development";
-import { getJWTToken } from "../../modules/utils";
+import { getJWTToken, getEncryptedPassword } from "../../modules/utils";
 import { sendEmail } from "../../modules/mail";
 
 export default {
@@ -27,8 +27,7 @@ export default {
       const user = await new User();
       user.local.email = value.email;
       user.local.name = value.name;
-      const salt = await bcryptjs.genSalt();
-      const hash = await bcryptjs.hash(value.password, salt);
+      const hash = await getEncryptedPassword(value.password);
       user.local.password = hash;
       await user.save();
 
@@ -122,6 +121,39 @@ export default {
       console.log("results: ", results);
 
       return res.json(results);
+    } catch (err) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    }
+  },
+
+  async resetPassword(req, res) {
+    try {
+      let { password } = req.body;
+
+      if (!password) {
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ err: "Password is required." });
+      }
+
+      const user = await User.findById(req.currentUser._id);
+
+      if (!user) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ err: "User does not exist." });
+      }
+
+      const sanitisedUser = userService.getUser(user);
+
+      if (!user.local.email) {
+        user.local.email = sanitisedUser.email;
+        user.local.name = sanitisedUser.name;
+      }
+      const hash = await getEncryptedPassword(password);
+      user.local.password = hash;
+      await user.save();
+      return res.json({ success: true });
     } catch (err) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
     }

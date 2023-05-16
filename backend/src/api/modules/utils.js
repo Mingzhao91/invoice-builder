@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import bcryptjs from "bcryptjs";
+
 import { devConfig } from "../../config/env/development";
 
 export const getJWTToken = (payload) => {
@@ -6,4 +8,10 @@ export const getJWTToken = (payload) => {
     expiresIn: "1d",
   });
   return token;
+};
+
+export const getEncryptedPassword = async (password) => {
+  const salt = await bcryptjs.genSalt();
+  const hash = await bcryptjs.hash(password, salt);
+  return hash;
 };
