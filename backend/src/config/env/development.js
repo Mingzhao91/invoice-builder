@@ -2,6 +2,7 @@ export const devConfig = {
   port: 3000,
   database: "invoice-builder",
   secret: "123456",
+  frontendURL: "http://localhost:4200",
   google: {
     clientId:
       "601715176426-qg1mga7jjhopl261jsdaftp4acai4d0u.apps.googleusercontent.com",
@@ -13,5 +14,11 @@ export const devConfig = {
     clientSecret: "c29573f22acad1c090992a42dd336c7df980d9e8",
     callbackURL: "http://localhost:3000/api/auth/github/callback",
   },
-  frontendURL: "http://localhost:4200",
+  ethereal: {
+    name: "Imelda Cormier",
+    username: "imelda.cormier@ethereal.email",
+    password: "yxybS1tGvm55xAETUz",
+    host: "smtp.ethereal.email",
+    port: 587,
+  },
 };
