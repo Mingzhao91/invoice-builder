@@ -39,7 +39,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authService.forgotPassword(this.form.value).subscribe({
         next: (data: any) => {
-          console.log('data: ', data);
           this.isLoading = false;
           this.openSnackBar(data.message, 'Success');
         },
